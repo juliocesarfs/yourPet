@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import Exception.PersistenceException;
 import Model.Pet;
@@ -56,6 +59,7 @@ public class DAOPet {
 		
 		return dao;
 	}
+
 	
 	public Pet getPetById(Integer id) {
 		Pet pet = null;
@@ -77,6 +81,46 @@ public class DAOPet {
 		return pet;
 	}
 	
+	public List<Pet> listAll() {
+		return this.listOrSearch(null);
+	}
+	
+	public List<Pet> findByName(String nome){
+		return this.listOrSearch(nome);
+	}
+	
+	private List<Pet> listOrSearch(String name) {
+		List<Pet> list = new ArrayList<>();
+		
+		Pet pet = null;
+		String sql = SQL_SELECT;
+		
+		if (name != null && !name.equals("")) {
+			sql = sql +"where name like ?";
+		}
+		PreparedStatement pst;
+		
+		try {
+			pst = con.prepareStatement(sql);
+			//2)
+			if (name!=null && !name.equals("")) {
+				pst.setString(1, name+"%");
+			}
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				pet = getPetByResultSet(rs);
+				list.add(pet);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Erro ao consultar o Banco(método getPetById() ):", e);
+		}
+		
+		return list;
+	}
+	
+	
 	private Pet getPetByResultSet(ResultSet rs) throws SQLException {
 		Pet pet;
 		pet = new Pet();
@@ -86,39 +130,92 @@ public class DAOPet {
 		pet.setSpecie(rs.getString("specie"));
 		pet.setBirth(rs.getDate("birth"));
 		pet.setGender(rs.getString("gender"));
+		
 		return pet;
 	}
 	
+	public Pet include(Pet pet) {
+		String sql = "insert into pet(name, race, specie, birth, gender) " + "values (?, ?, ?, ?, ?)";
+		
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql, 
+					Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setString(1, pet.getName());
+			ps.setString(2, pet.getRace());
+			ps.setString(3, pet.getSpecie());
+			ps.setDate(4, pet.getBirth());
+			ps.setString(5, pet.getGender());
+			
+			ps.executeUpdate();
+			
+			ResultSet generatedkeys = ps.getGeneratedKeys();
+			
+			if (generatedkeys.next()) {
+				pet.setId(generatedkeys.getInt(1));
+			}
+			else {
+				throw new SQLException("Erro ao criar amigo, ID não retornado");
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException("Erro ao Incluir: "+e.getMessage(), e);
+		}
+		
+		return pet;
+	}
 	
+	public Pet update(Pet pet) {
+		String sql = "update pet set name=?, race=?, specie=?, birth=?, gender=?, where id=?";
+		
+		PreparedStatement ps;
+		int affected = 0;
+		try {
+			ps = this.con.prepareStatement(sql);
+			ps.setString(1, pet.getName());
+			ps.setString(2, pet.getRace());
+			ps.setString(3, pet.getSpecie());
+			ps.setDate(4, pet.getBirth());
+			ps.setString(5, pet.getGender());
+			ps.setInt(6, pet.getId());
+			
+			affected = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Erro ao atualizar: "+e.getMessage(), e);
+		}
+		
+		switch (affected) {
+		case 0:
+			return null;
+		case 1:
+			return pet;
+		default:
+			throw new PersistenceException("Multiplos registros atualizados: ", null);
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Pet delete(Pet pet) {
+		String sql = "delete from pet where id=?";
+		
+		PreparedStatement ps;
+		int affected;
+		try {
+			ps = this.con.prepareStatement(sql);
+			ps.setInt(1, pet.getId());
+			
+			affected = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Erro ao remover: "+e.getMessage(), e);
+		}
+		
+		switch (affected) {
+		case 0:
+			return null;
+		case 1:
+			return pet;
+		default:
+			throw new PersistenceException("Multiplos registros removidos: ", null);
+		}
+	}
 }
