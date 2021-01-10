@@ -2,7 +2,9 @@ package Model;
 
 import java.sql.Date;
 
-public class Pet {
+import lombok.Data;
+
+public @Data class Pet {
 	
 	private Integer id;
 	private String name;
@@ -13,54 +15,6 @@ public class Pet {
 	
 	public Pet() {
 		
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getRace() {
-		return race;
-	}
-	
-	public void setRace(String race) {
-		this.race = race;
-	}
-	
-	public String getSpecie() {
-		return specie;
-	}
-	
-	public void setSpecie(String specie) {
-		this.specie = specie;
-	}
-	
-	public Date getBirth() {
-		return birth;
-	}
-	
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
-	
-	public String getGender() {
-		return gender;
-	}
-	
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 	
 	@Override
