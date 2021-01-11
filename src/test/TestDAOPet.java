@@ -1,7 +1,7 @@
 package test;
 
-import Model.Pet;
-import Persistence.DAOPet;
+import model.Pet;
+import persistence.DAOPet;
 
 public class TestDAOPet {
 	public static void main(String[] args) {

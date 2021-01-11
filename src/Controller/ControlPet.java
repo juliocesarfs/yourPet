@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
 import java.util.List;
 
-import Exception.PersistenceException;
-import Model.Pet;
-import Persistence.DAOPet;
+import exception.PersistenceException;
+import model.Pet;
+import persistence.DAOPet;
 import utils.Return;
 
 public class ControlPet {
