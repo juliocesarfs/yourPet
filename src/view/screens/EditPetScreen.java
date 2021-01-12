@@ -3,35 +3,28 @@ package view.screens;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.ControlPet;
 import model.Pet;
-import view.CreatePetFrame;
+import view.EditPetFrame;
 import view.MainFrame;
-import view.components.Button;
 import view.components.FormPanel;
 import view.components.TitlePanel;
 
-public class CreatePetScreen extends JPanel  {
+public class EditPetScreen extends JPanel {
 	
 	public ControlPet control = new ControlPet();
-	//public Button btnBack;
-	public TitlePanel titlePanel = new TitlePanel("Inserção");
+	public TitlePanel titlePanel = new TitlePanel("Edição");
 	
-	public CreatePetScreen(CreatePetFrame currentFrame, MainFrame mainWindow) {
+	public EditPetScreen(EditPetFrame currentFrame, MainFrame mainWindow, Pet pet) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		
-		FormPanel form = new FormPanel(currentFrame, null);
-		
-		
-		
-		
+		FormPanel form = new FormPanel(currentFrame, pet);		
 		
 		add("Center", form);
 		add("North", this.titlePanel);
-		//add("South", btnBack);
 	}
+
 }

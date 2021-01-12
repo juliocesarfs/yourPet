@@ -2,6 +2,7 @@ package view.components;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Calendar;
 import java.util.Properties;
 
 import javax.swing.BoxLayout;
@@ -11,11 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.jdatepicker.DateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import lombok.Data;
+import model.Pet;
 import utils.DateLabelFormatter;
 
 public class FormPanel extends JPanel {
@@ -35,9 +38,8 @@ public class FormPanel extends JPanel {
 	public Button btnBack;
 	public Button btnSave;
 	
-	public FormPanel(JFrame currentFrame) {
+	public FormPanel(JFrame currentFrame, Pet pet) {
 		setLayout(null);
-		
 		
 		this.labelName = new JLabel("Nome:");
 		this.name = new JTextField();
@@ -82,7 +84,9 @@ public class FormPanel extends JPanel {
 		p.put("text.year", "Ano");
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		this.birth = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		DateLabelFormatter dateFormatter = new DateLabelFormatter();
+		
+		this.birth = new JDatePickerImpl(datePanel, dateFormatter);
 		this.labelBirth.setBounds(50, 200, 100, 20);
 		this.birth.setBounds(150, 200, 120, 30);
 		add(this.labelRace);
@@ -91,13 +95,21 @@ public class FormPanel extends JPanel {
 		add(this.birth);
 		
 		
-		this.btnBack = new Button("Voltar", currentFrame, this);
+		this.btnBack = new Button("Voltar", 2, currentFrame, this);
 		this.btnBack.setBounds(120, 260, 100, 50);
 		add(btnBack);
 		
-		this.btnSave = new Button("Salvar", currentFrame, this);
+		this.btnSave = new Button("Salvar", 2, currentFrame, this);
 		this.btnSave.setBounds(230, 260, 100, 50);
 		add(btnSave);
+		
+		if (pet != null) {
+			this.name.setText(pet.getName());
+			this.race.setText(pet.getRace());
+			this.specie.setText(pet.getSpecie());
+			this.gender.setSelectedItem(pet.getGender());
+			model.setValue(pet.getBirth());
+		}
 		
 	}
 	

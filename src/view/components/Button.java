@@ -19,6 +19,7 @@ public class Button extends JButton implements ActionListener {
 	public Font font = new Font("Roboto", Font.BOLD, 17);
 	public JFrame closeWindow, openWindow;
 	public ControlButtons controlBtn;
+	public int ID;
 	
     public Color getBackgroundColor() {
 		return backgroundColor;
@@ -36,9 +37,9 @@ public class Button extends JButton implements ActionListener {
 		this.font = font;
 	}
 
-    public Button(String title, JFrame closeWindow, JPanel panel) {
+    public Button(String title, int ID, JFrame closeWindow, JPanel panel) {
     	this.closeWindow = closeWindow;
-    	
+    	this.ID = ID;
     	
         CustomeBorder customeBorder = new CustomeBorder();
         setBorder(customeBorder.getCompoundBorder());
@@ -50,7 +51,11 @@ public class Button extends JButton implements ActionListener {
         
         controlBtn = new ControlButtons(this, panel);
     }
-
+    
+    public int getID() {
+    	return this.ID;
+    }
+    
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.closeWindow.dispose();
