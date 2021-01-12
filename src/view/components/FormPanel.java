@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.util.Properties;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,13 +15,14 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import lombok.Data;
 import utils.DateLabelFormatter;
 
 public class FormPanel extends JPanel {
 	public JTextField name;
 	public JTextField race;
 	public JTextField specie;
-	public JTextField gender;
+	public JComboBox<String> gender;
 	
 	public JLabel labelName;
 	public JLabel labelRace;
@@ -29,7 +32,10 @@ public class FormPanel extends JPanel {
 	
 	public JDatePickerImpl birth;
 	
-	public FormPanel() {
+	public Button btnBack;
+	public Button btnSave;
+	
+	public FormPanel(JFrame currentFrame) {
 		setLayout(null);
 		
 		
@@ -58,7 +64,8 @@ public class FormPanel extends JPanel {
 		add(this.specie);
 
 		this.labelGender = new JLabel("Sexo:");
-		this.gender = new JTextField();
+		String genders[] = {"F", "M"};
+		this.gender = new JComboBox(genders);
 		this.labelGender.setBounds(50, 160, 100, 20);
 		this.gender.setBounds(150, 160, 100, 20);
 		add(this.labelRace);
@@ -84,8 +91,13 @@ public class FormPanel extends JPanel {
 		add(this.birth);
 		
 		
+		this.btnBack = new Button("Voltar", currentFrame, this);
+		this.btnBack.setBounds(120, 260, 100, 50);
+		add(btnBack);
 		
-		
+		this.btnSave = new Button("Salvar", currentFrame, this);
+		this.btnSave.setBounds(230, 260, 100, 50);
+		add(btnSave);
 		
 	}
 	

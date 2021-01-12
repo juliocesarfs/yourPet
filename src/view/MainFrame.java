@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         setSize(500, 600);
         setResizable(false);
 
-        getContentPane().add(new MainScreen(this, this.createPetFrame));
+        getContentPane().add(new MainScreen(this));
         setVisible(true);
     }
 }

@@ -17,21 +17,21 @@ import view.components.TitlePanel;
 public class CreatePetScreen extends JPanel  {
 	
 	public ControlPet control = new ControlPet();
-	public Button btnBack;
+	//public Button btnBack;
 	public TitlePanel titlePanel = new TitlePanel("Inserção");
 	
 	public CreatePetScreen(CreatePetFrame currentFrame, MainFrame mainWindow) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		
-		FormPanel form = new FormPanel();
+		FormPanel form = new FormPanel(currentFrame);
 		
-		btnBack = new Button("Voltar", currentFrame, mainWindow);
+		
 		
 		
 		
 		add("Center", form);
 		add("North", this.titlePanel);
-		add("South", btnBack);
+		//add("South", btnBack);
 	}
 }

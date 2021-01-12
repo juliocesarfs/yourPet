@@ -21,11 +21,11 @@ public class MainScreen extends JPanel {
 	JButton btn = new JButton("Open");
 	TitlePanel title = new TitlePanel("yourPet");
 
-	public MainScreen(MainFrame currentFrame, CreatePetFrame createPetFrame /*Edit*/ /*Delete*/) {
+	public MainScreen(MainFrame currentFrame /*Edit*/ /*Delete*/) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		
 		add("North", title);
-		add("Center", new TablePanel(currentFrame, createPetFrame));
+		add("Center", new TablePanel(currentFrame));
 	}
 }

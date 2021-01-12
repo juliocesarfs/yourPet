@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controller.ControlButtons;
 import view.CreatePetFrame;
@@ -35,9 +36,9 @@ public class Button extends JButton implements ActionListener {
 		this.font = font;
 	}
 
-    public Button(String title, JFrame closeWindow, JFrame openWindow) {
+    public Button(String title, JFrame closeWindow, JPanel panel) {
     	this.closeWindow = closeWindow;
-    	this.openWindow = openWindow;
+    	
     	
         CustomeBorder customeBorder = new CustomeBorder();
         setBorder(customeBorder.getCompoundBorder());
@@ -47,7 +48,7 @@ public class Button extends JButton implements ActionListener {
         setFont(font);
         addActionListener(this);
         
-        controlBtn = new ControlButtons(this);
+        controlBtn = new ControlButtons(this, panel);
     }
 
 	@Override

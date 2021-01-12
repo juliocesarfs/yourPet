@@ -25,14 +25,14 @@ public class TablePanel extends JPanel {
 	public ControlPet control = new ControlPet();
 	DefaultTableModel model = new DefaultTableModel();
 	
-	public TablePanel(MainFrame currentFrame, CreatePetFrame createPetFrame) {
+	public TablePanel(MainFrame currentFrame) {
 		String [] columns = {"NOME", "RAÇA", "ESPÉCIE", "IDADE", "SEXO"};
 		
 		this.table = new JTable(model);
 		
 		JScrollPane scroll = new JScrollPane(createTable());
 		
-		btnInsert = new Button("Inserir", currentFrame, createPetFrame);
+		btnInsert = new Button("Inserir", currentFrame, this);
 		
 		add(scroll);
 		add(btnInsert);
