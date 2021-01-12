@@ -2,6 +2,8 @@ package view.components;
 
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -9,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ControlPet;
 import model.Pet;
+import view.CreatePetFrame;
+import view.MainFrame;
 
 public class TablePanel extends JPanel {
 	
@@ -21,15 +25,17 @@ public class TablePanel extends JPanel {
 	public ControlPet control = new ControlPet();
 	DefaultTableModel model = new DefaultTableModel();
 	
-	public TablePanel() {
+	public TablePanel(MainFrame currentFrame, CreatePetFrame createPetFrame) {
 		String [] columns = {"NOME", "RAÇA", "ESPÉCIE", "IDADE", "SEXO"};
 		
 		this.table = new JTable(model);
 		
 		JScrollPane scroll = new JScrollPane(createTable());
 		
-		add(scroll);
+		btnInsert = new Button("Inserir", currentFrame, createPetFrame);
 		
+		add(scroll);
+		add(btnInsert);
 		
 	}
 	

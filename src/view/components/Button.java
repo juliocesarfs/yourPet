@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import controller.ControlButtons;
+import view.CreatePetFrame;
 import view.styles.CustomeBorder;
 
 public class Button extends JButton implements ActionListener {
@@ -15,6 +17,7 @@ public class Button extends JButton implements ActionListener {
 	public Color backgroundColor = Color.white;
 	public Font font = new Font("Roboto", Font.BOLD, 17);
 	public JFrame closeWindow, openWindow;
+	public ControlButtons controlBtn;
 	
     public Color getBackgroundColor() {
 		return backgroundColor;
@@ -42,15 +45,14 @@ public class Button extends JButton implements ActionListener {
         setBackground(backgroundColor);
         setText(title);
         setFont(font);
-
         addActionListener(this);
+        
+        controlBtn = new ControlButtons(this);
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		this.closeWindow.dispose();
+		this.controlBtn.open();
 	}
-    
-   
 }

@@ -9,13 +9,13 @@ public class TitlePanel extends JPanel {
 	
 	public JLabel title;
 	
-	public TitlePanel() {
-		this.title = new JLabel("yourPet");
-		title.setSize(new Dimension(30, 30));
+	public TitlePanel(String title) {
+		this.title = new JLabel(title);
+		this.title.setSize(new Dimension(30, 30));
 		
 		
-		title.setHorizontalTextPosition(JLabel.CENTER);
-		add(title);
+		this.title.setHorizontalTextPosition(JLabel.CENTER);
+		add(this.title);
 	}
 
 }

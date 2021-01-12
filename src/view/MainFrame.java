@@ -7,14 +7,17 @@ import javax.swing.*;
 import view.screens.MainScreen;
 
 public class MainFrame extends JFrame {
+	public CreatePetFrame createPetFrame;
+	//EditPetFrame
+	//DeletePetFrame
+	
     public MainFrame(String title) {
         super(title);
         setDefaultCloseOperation(MainFrame.EXIT_ON_CLOSE);
-        setSize(480, 450);
+        setSize(500, 600);
         setResizable(false);
 
-
-        getContentPane().add(new MainScreen(this));
+        getContentPane().add(new MainScreen(this, this.createPetFrame));
         setVisible(true);
     }
 }
