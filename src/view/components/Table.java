@@ -27,7 +27,7 @@ public class Table extends JTable {
 		this.model.addColumn("SEXO");
 		
 		for (Pet pet : list) {
-			this.model.addRow(new Object[]{pet.getId(), pet.getName(), pet.getRace(), pet.getSpecie(), "5", pet.getGender()});
+			this.model.addRow(new Object[]{pet.getId(), pet.getName(), pet.getRace(), pet.getSpecie(), pet.getAge(), pet.getGender()});
 		}
 	}
 	

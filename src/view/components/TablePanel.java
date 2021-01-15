@@ -40,9 +40,9 @@ public class TablePanel extends JPanel implements ActionListener {
 		
 		JScrollPane scroll = new JScrollPane(table);
 		
-		this.btnInsert = new Button("Inserir", this);
-		this.btnEdit = new Button("Editar", this);
-		this.btnDelete = new Button("Deletar", this);
+		this.btnInsert = new Button("Inserir");
+		this.btnEdit = new Button("Editar");
+		this.btnDelete = new Button("Deletar");
 		
 		this.btnInsert.addActionListener(this);
 		this.btnEdit.addActionListener(this);
@@ -65,6 +65,7 @@ public class TablePanel extends JPanel implements ActionListener {
 	
 	
 	private void actionButton(Button btn) {
+		Pet pet = null;
 		switch (btn.getText()) {
 		case "Inserir":
 			 this.screenTransitions = new ScreenTransitions(null);
@@ -72,13 +73,16 @@ public class TablePanel extends JPanel implements ActionListener {
 			this.currentFrame.dispose();
 			break;
 		case "Editar":
-			Pet pet = this.table.getSelectedPet();
+			pet = this.table.getSelectedPet();
 			this.screenTransitions = new ScreenTransitions(pet);
 			this.screenTransitions.showEditPetFrame();
 			this.currentFrame.dispose();
 			break;
 		case "Deletar":
-			//TO DO
+			pet = this.table.getSelectedPet();
+			this.screenTransitions = new ScreenTransitions(pet);
+			this.screenTransitions.showDeletePetFrame();
+			this.currentFrame.dispose();
 			break;
 		}
 	}

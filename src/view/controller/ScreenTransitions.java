@@ -32,5 +32,10 @@ public class ScreenTransitions {
 		this.editPetFrame = new EditPetFrame("Edição", this.pet);
 		this.editPetFrame.setVisible(true);
 	}
+	
+	public void showDeletePetFrame() {
+		this.deletePetFrame = new DeletePetFrame("Exclusão", this.pet);
+		this.deletePetFrame.setVisible(true);
+	}
 
 }

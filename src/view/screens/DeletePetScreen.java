@@ -10,6 +10,7 @@ import controller.ControlPet;
 import model.Pet;
 import view.DeletePetFrame;
 import view.MainFrame;
+import view.components.DeletePanel;
 import view.components.FormPanel;
 import view.components.TitlePanel;
 
@@ -17,16 +18,17 @@ public class DeletePetScreen extends JPanel {
 	
 	public ControlPet control = new ControlPet();
 	public TitlePanel titlePanel = new TitlePanel("Tem certeza que deseja excluir?");
-	public FormPanel formPanel;
+	
 	
 	public DeletePetScreen(DeletePetFrame currentFrame, Pet pet) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		
-		this.formPanel = new FormPanel(currentFrame, pet);
+		DeletePanel deletePanel = new DeletePanel(currentFrame, pet);
+		
 		
 		add("North", this.titlePanel);
-		add("Center", this.formPanel);
+		add("Center", deletePanel);
 	}
 
 }

@@ -37,7 +37,7 @@ public class Button extends JButton {
 		this.font = font;
 	}
 
-    public Button(String title, JPanel panel) {
+    public Button(String title) {
     	this.closeWindow = closeWindow;
     	this.ID = ID;
     	
@@ -47,8 +47,7 @@ public class Button extends JButton {
         setBackground(backgroundColor);
         setText(title);
         setFont(font);
-        
-        controlBtn = new ControlButtons(this, panel);
+       
     }
     
     public int getID() {

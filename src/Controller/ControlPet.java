@@ -48,6 +48,24 @@ public class ControlPet {
 		return new Return(true, "Alteração realizada com sucesso", result);
 	}
 	
+	public Return delete(Pet pet) {
+		Pet result = null;
+		
+		try {
+			Return ret = this.validate(pet);
+			
+			if (!ret.isSucess()) return ret;
+			
+			result = dao.delete(pet);
+		} catch (PersistenceException e) {
+			return new Return(false, e.getMessage(), pet);
+		} catch (Exception e) {
+			return this.unknownError(e, pet);
+		}
+		
+		return new Return(true, "Pet deletado com sucesso", result);
+	}
+	
 	public Return listAll() {
 		List<Pet> list = null;
 		try {
