@@ -2,35 +2,31 @@ package view.screens;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.ControlPet;
 import model.Pet;
-import view.CreatePetFrame;
+import view.DeletePetFrame;
 import view.MainFrame;
-import view.components.Button;
 import view.components.FormPanel;
 import view.components.TitlePanel;
-import view.controller.ScreenTransitions;
 
-public class CreatePetScreen extends JPanel {
+public class DeletePetScreen extends JPanel {
 	
 	public ControlPet control = new ControlPet();
-	public TitlePanel titlePanel = new TitlePanel("Inserção");
+	public TitlePanel titlePanel = new TitlePanel("Tem certeza que deseja excluir?");
+	public FormPanel formPanel;
 	
-	
-	public CreatePetScreen(CreatePetFrame currentFrame) {
+	public DeletePetScreen(DeletePetFrame currentFrame, Pet pet) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		
-		FormPanel form = new FormPanel(currentFrame, null);
+		this.formPanel = new FormPanel(currentFrame, pet);
 		
-		add("Center", form);
 		add("North", this.titlePanel);
-		
+		add("Center", this.formPanel);
 	}
+
 }

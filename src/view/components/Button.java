@@ -13,7 +13,7 @@ import controller.ControlButtons;
 import view.CreatePetFrame;
 import view.styles.CustomeBorder;
 
-public class Button extends JButton implements ActionListener {
+public class Button extends JButton {
 	
 	public Color backgroundColor = Color.white;
 	public Font font = new Font("Roboto", Font.BOLD, 17);
@@ -37,7 +37,7 @@ public class Button extends JButton implements ActionListener {
 		this.font = font;
 	}
 
-    public Button(String title, int ID, JFrame closeWindow, JPanel panel) {
+    public Button(String title, JPanel panel) {
     	this.closeWindow = closeWindow;
     	this.ID = ID;
     	
@@ -47,7 +47,6 @@ public class Button extends JButton implements ActionListener {
         setBackground(backgroundColor);
         setText(title);
         setFont(font);
-        addActionListener(this);
         
         controlBtn = new ControlButtons(this, panel);
     }
@@ -55,10 +54,4 @@ public class Button extends JButton implements ActionListener {
     public int getID() {
     	return this.ID;
     }
-    
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.closeWindow.dispose();
-		this.controlBtn.open();
-	}
 }

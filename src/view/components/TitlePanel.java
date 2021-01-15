@@ -9,6 +9,7 @@ public class TitlePanel extends JPanel {
 	
 	public JLabel title;
 	
+	
 	public TitlePanel(String title) {
 		this.title = new JLabel(title);
 		this.title.setSize(new Dimension(30, 30));

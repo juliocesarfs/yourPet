@@ -2,6 +2,8 @@ package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -16,50 +18,71 @@ import controller.ControlPet;
 import model.Pet;
 import view.CreatePetFrame;
 import view.MainFrame;
+import view.controller.ScreenTransitions;
 
-public class TablePanel extends JPanel {
+public class TablePanel extends JPanel implements ActionListener {
 	
-	public JTable table;
-	public Button btnConfirm;
+	public MainFrame currentFrame;
+	
+	public Table table;
+	public Button btnInsert;
+	public Button btnEdit;
+	public Button btnDelete;
 	public List<Pet> list;
-	public JComboBox<String> option;
 	
 	public ControlPet control = new ControlPet();
-	DefaultTableModel model = new DefaultTableModel();
+	public ScreenTransitions screenTransitions;
 	
 	public TablePanel(MainFrame currentFrame) {
 		setLayout(new FlowLayout());
+		this.currentFrame = currentFrame;
+		this.table = new Table();
 		
-		this.table = new JTable(model);
+		JScrollPane scroll = new JScrollPane(table);
 		
-		JScrollPane scroll = new JScrollPane(createTable());
+		this.btnInsert = new Button("Inserir", this);
+		this.btnEdit = new Button("Editar", this);
+		this.btnDelete = new Button("Deletar", this);
 		
-		String options[] = {"Inserir", "Editar", "Deletar"};
+		this.btnInsert.addActionListener(this);
+		this.btnEdit.addActionListener(this);
+		this.btnDelete.addActionListener(this);
 		
-		option = new JComboBox<String>(options);
-		
-		btnConfirm = new Button("Confirmar", 1, currentFrame, this);
 		
 		add(scroll);
-		add(option);
-		add(btnConfirm);
+		add(this.btnInsert);
+		add(this.btnEdit);
+		add(this.btnDelete);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Button btn = (Button) e.getSource();
+		this.actionButton(btn);
 		
 	}
 	
-	private JTable createTable() {
-		this.list = (List<Pet>) this.control.listAll().getValue();
-		
-		this.model.addColumn("CODIGO");
-		this.model.addColumn("NOME");
-		this.model.addColumn("RAÇA");
-		this.model.addColumn("ESPÉCIE");
-		this.model.addColumn("IDADE");
-		this.model.addColumn("SEXO");
-		
-		for (Pet pet : this.list) {
-			this.model.addRow(new Object[]{pet.getId(), pet.getName(), pet.getRace(), pet.getSpecie(), "5", pet.getGender()});
+	
+	private void actionButton(Button btn) {
+		switch (btn.getText()) {
+		case "Inserir":
+			 this.screenTransitions = new ScreenTransitions(null);
+			this.screenTransitions.showCreatePetFrame();
+			this.currentFrame.dispose();
+			break;
+		case "Editar":
+			Pet pet = this.table.getSelectedPet();
+			this.screenTransitions = new ScreenTransitions(pet);
+			this.screenTransitions.showEditPetFrame();
+			this.currentFrame.dispose();
+			break;
+		case "Deletar":
+			//TO DO
+			break;
 		}
-		
-		return this.table;
-    }
+	}
+	
+	
+	
 }

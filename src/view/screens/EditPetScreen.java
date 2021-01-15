@@ -17,7 +17,7 @@ public class EditPetScreen extends JPanel {
 	public ControlPet control = new ControlPet();
 	public TitlePanel titlePanel = new TitlePanel("Edição");
 	
-	public EditPetScreen(EditPetFrame currentFrame, MainFrame mainWindow, Pet pet) {
+	public EditPetScreen(EditPetFrame currentFrame, Pet pet) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		

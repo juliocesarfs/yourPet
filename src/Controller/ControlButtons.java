@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import model.Pet;
 import utils.Return;
 import view.CreatePetFrame;
+import view.DeletePetFrame;
 import view.EditPetFrame;
 import view.MainFrame;
 import view.components.Button;
@@ -21,6 +22,7 @@ public class ControlButtons {
 	public MainFrame mainFrame;
 	public CreatePetFrame createPetFrame;
 	public EditPetFrame editPetFrame;
+	public DeletePetFrame deletePetFrame;
 	public Button btn;
 	public ControlPet controlPet = new ControlPet();
 	public JPanel panel;
@@ -39,24 +41,29 @@ public class ControlButtons {
 			if (boxSelected == "Inserir") {
 				this.createPetFrame = new CreatePetFrame("Inserir", this.mainFrame);
 				this.createPetFrame.setVisible(true);
+				
 			} else if (boxSelected == "Editar") {
+				JTable table = tablePanel.table;
+				
+				
+				this.editPetFrame = new EditPetFrame("Edição", this.mainFrame, this.pet);
+				this.editPetFrame.setVisible(true);
+				
+			} else if (boxSelected == "Deletar") {
 				JTable table = tablePanel.table;
 				int row = table.getSelectedRow();
 				int petID = (Integer) table.getValueAt(row, 0);
 				
 				this.pet = (Pet) this.controlPet.getPetById(petID).getValue();
 				
-				this.editPetFrame = new EditPetFrame("Edição", this.mainFrame, this.pet);
-				this.editPetFrame.setVisible(true);
+				this.deletePetFrame = new DeletePetFrame("Exclusão", this.mainFrame, this.pet);
+				this.deletePetFrame.setVisible(true);
 			}
 			
 			
 		} else {
 			 if (this.btn.getText() == "Salvar") {
 				saveAction();
-			 }
-			 if (this.btn.getText() == "Editar") {
-				 System.out.println("OK");
 			 }
 			this.mainFrame = new MainFrame("yourPet");
 			this.mainFrame.setVisible(true);

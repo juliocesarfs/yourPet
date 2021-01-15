@@ -2,8 +2,10 @@ package model;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 public @Data class Pet {
 	
 	private Integer id;
@@ -15,6 +17,14 @@ public @Data class Pet {
 	
 	public Pet() {
 		
+	}
+	
+	public Pet(String name, String race, String specie, Date birth, String gender) {
+		this.name = name;
+		this.race = race;
+		this.specie = specie;
+		this.birth = birth;
+		this.gender = gender;
 	}
 	
 	@Override

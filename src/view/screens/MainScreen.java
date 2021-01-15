@@ -21,7 +21,7 @@ public class MainScreen extends JPanel {
 	JButton btn = new JButton("Open");
 	TitlePanel title = new TitlePanel("yourPet");
 
-	public MainScreen(MainFrame currentFrame /*Edit*/ /*Delete*/) {
+	public MainScreen(MainFrame currentFrame) {
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		

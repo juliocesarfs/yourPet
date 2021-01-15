@@ -3,17 +3,17 @@ package view;
 import javax.swing.JFrame;
 
 import model.Pet;
-import view.screens.EditPetScreen;
+import view.screens.DeletePetScreen;
 
-public class EditPetFrame extends JFrame {
+public class DeletePetFrame extends JFrame {
 	
-	public EditPetFrame(String title, Pet pet) {
+	
+	public DeletePetFrame(String title, Pet pet) {
         super(title);
         setDefaultCloseOperation(CreatePetFrame.EXIT_ON_CLOSE);
         setSize(480, 450);
         setResizable(false);
         
-        getContentPane().add(new EditPetScreen(this, pet));
+        getContentPane().add(new DeletePetScreen(this, pet));
     }
-
 }

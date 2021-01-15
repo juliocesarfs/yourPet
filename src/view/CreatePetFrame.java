@@ -7,14 +7,14 @@ import view.screens.CreatePetScreen;
 
 public class CreatePetFrame extends JFrame {
 	
-	MainFrame mainWindow;
-	public CreatePetFrame(String title, MainFrame mainWindow) {
+	public CreatePetFrame(String title) {
         super(title);
-        this.mainWindow = mainWindow;
         setDefaultCloseOperation(CreatePetFrame.EXIT_ON_CLOSE);
         setSize(480, 450);
         setResizable(false);
         
-        getContentPane().add(new CreatePetScreen(this, this.mainWindow));
+        setVisible(true);
+        
+        getContentPane().add(new CreatePetScreen(this));
     }
 }

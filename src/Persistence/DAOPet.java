@@ -166,7 +166,7 @@ public class DAOPet {
 	}
 	
 	public Pet update(Pet pet) {
-		String sql = "update pet set name=?, race=?, specie=?, birth=?, gender=?, where id=?";
+		String sql = "update pet set name=?, race=?, specie=?, birth=?, gender=? where id=?";
 		
 		PreparedStatement ps;
 		int affected = 0;
