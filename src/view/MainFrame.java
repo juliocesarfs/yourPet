@@ -1,8 +1,6 @@
 package view;
 
 
-import java.awt.Color;
-
 import javax.swing.*;
 
 import view.screens.MainScreen;
