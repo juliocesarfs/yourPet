@@ -35,7 +35,7 @@ After this, *just run App.java in <**app**> package*.
 
 # 📕 License
 
-This project is under the [MIT license]()
+This project is under the [MIT license](https://github.com/juliocesarfs/yourPet/blob/master/LICENSE)
 
 Made with 💜 by [*Júlio César*](https://github.com/juliocesarfs) 🚀
 
