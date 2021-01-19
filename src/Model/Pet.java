@@ -1,13 +1,11 @@
 package model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import utils.AgeCalculator;
+
 
 @AllArgsConstructor
 public @Data class Pet {
@@ -46,8 +44,6 @@ public @Data class Pet {
 	    
 	    String date = this.birth.toString();
 		String dateArray[] = date.split("-");
-	   
-		System.out.println(dateArray[2]);
 
 	    dob.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2])); 
 
@@ -56,6 +52,8 @@ public @Data class Pet {
 	    if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
 	        age--; 
 	    }
+	    
+	    if (age == -1) age++;
 
 	    return age;  
 	}

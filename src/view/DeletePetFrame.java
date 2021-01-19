@@ -13,6 +13,7 @@ public class DeletePetFrame extends JFrame {
         setDefaultCloseOperation(CreatePetFrame.EXIT_ON_CLOSE);
         setSize(480, 450);
         setResizable(false);
+        this.setLocationRelativeTo(null);
         
         getContentPane().add(new DeletePetScreen(this, pet));
     }

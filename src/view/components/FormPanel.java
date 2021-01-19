@@ -1,14 +1,11 @@
 package view.components;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,17 +13,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jdatepicker.DateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import controller.ControlPet;
-import lombok.Data;
 import model.Pet;
+import utils.Constants;
 import utils.DateLabelFormatter;
 import utils.Return;
-import view.DeletePetFrame;
 import view.controller.ScreenTransitions;
 
 public class FormPanel extends JPanel implements ActionListener	{
@@ -35,11 +30,11 @@ public class FormPanel extends JPanel implements ActionListener	{
 	public JTextField specie;
 	public JComboBox<String> gender;
 	
-	public JLabel labelName;
-	public JLabel labelRace;
-	public JLabel labelSpecie;
-	public JLabel labelGender;
-	public JLabel labelBirth;
+	public Label labelName;
+	public Label labelRace;
+	public Label labelSpecie;
+	public Label labelGender;
+	public Label labelBirth;
 	
 	public JDatePickerImpl birth;
 	
@@ -50,6 +45,7 @@ public class FormPanel extends JPanel implements ActionListener	{
 	public ControlPet controlPet = new ControlPet();
 	public Pet pet = new Pet();
 	
+	public Constants constant = new Constants();
 	
 	public JFrame currentFrame;
 	
@@ -64,30 +60,30 @@ public class FormPanel extends JPanel implements ActionListener	{
 		this.screenTransitions = new ScreenTransitions(pet);
 		
 		
-		this.labelName = new JLabel("Nome:");
+		this.labelName = new Label("Nome:");
 		this.name = new JTextField();
 		this.labelName.setBounds(50, 40, 100, 20);
 		this.name.setBounds(150, 40, 100, 20);
 		
-		this.labelRace = new JLabel("Raça:");
+		this.labelRace = new Label("Raça:");
 		this.race = new JTextField();
 		this.labelRace.setBounds(50, 80, 100, 20);
 		this.race.setBounds(150, 80, 100, 20);
 		
-		this.labelSpecie = new JLabel("Espécie:");
+		this.labelSpecie = new Label("Espécie:");
 		this.specie = new JTextField();
 		this.labelSpecie.setBounds(50, 120, 100, 20);
 		this.specie.setBounds(150, 120, 100, 20);
 		
 
-		this.labelGender = new JLabel("Sexo:");
+		this.labelGender = new Label("Sexo:");
 		String genders[] = {"F", "M"};
 		this.gender = new JComboBox(genders);
 		this.labelGender.setBounds(50, 160, 100, 20);
 		this.gender.setBounds(150, 160, 100, 20);
 		
 		
-		this.labelBirth = new JLabel("Nascimento:");
+		this.labelBirth = new Label("Nascimento:");
 		UtilDateModel model = new UtilDateModel();
 		
 		Properties p = new Properties();
@@ -115,15 +111,18 @@ public class FormPanel extends JPanel implements ActionListener	{
 		add(this.labelGender);
 		add(this.gender);
 		
+		this.setBackground(constant.COLOR_BACKGROUND);
 		
-		this.btnBack = new Button("Voltar", this);
+		this.btnBack = new Button("Voltar");
 		this.btnBack.setBounds(120, 260, 100, 50);
-		btnBack.addActionListener(this);
+		this.btnBack.addActionListener(this);
+		this.btnBack.setBackground(constant.COLOR_YELLOW);
 		add(btnBack);
 		
-		this.btnSave = new Button("Salvar", this);
+		this.btnSave = new Button("Salvar");
 		this.btnSave.setBounds(230, 260, 100, 50);
-		btnSave.addActionListener(this);
+		this.btnSave.addActionListener(this);
+		this.btnSave.setBackground(constant.COLOR_GREEN);
 		add(btnSave);
 		
 		if (pet != null) {
@@ -142,7 +141,7 @@ public class FormPanel extends JPanel implements ActionListener	{
 		buttonAction(btn);
 	}
 	
-	private void buttonAction(Button btn) {
+	private Return buttonAction(Button btn) {
 		
 		
 		switch (btn.getText()) {
@@ -150,18 +149,19 @@ public class FormPanel extends JPanel implements ActionListener	{
 				Return result = null;
 				result = this.saveOrUpdate();		
 				
-				if (!result.isSucess()) {
-					JOptionPane.showMessageDialog(null, result.getMessage());
-				} else {
+				JOptionPane.showMessageDialog(null, result.getMessage());
+				
+				if (result.isSucess()) {
 					this.screenTransitions.showMainFrame();
 					this.currentFrame.dispose();
-					JOptionPane.showMessageDialog(null, result.getMessage());
 				}
-				break;
+				
+				return result;
 				
 			default:
 				this.screenTransitions.showMainFrame();
 				this.currentFrame.dispose();
+				return new Return(true, "Voltou com sucesso", null);
 		}
 	}
 	
@@ -173,15 +173,23 @@ public class FormPanel extends JPanel implements ActionListener	{
 	}
 	
 	private Return saveAction() {
-		createPet();
-		Return result = this.controlPet.include(this.pet);
+		Return result = createPet();
+		
+		if (!result.isSucess())
+			return result;
+		
+		result = this.controlPet.include(this.pet);
 		
 		return result;
 	}
 	
 	private Return updateAction() {
-		createPet();
-		Return result = this.controlPet.update(this.pet);
+		Return result = createPet();
+		
+		if (!result.isSucess())
+			return result;
+		
+		result = this.controlPet.update(this.pet);
 		
 		return result;
 	}
@@ -202,6 +210,10 @@ public class FormPanel extends JPanel implements ActionListener	{
 			
 			Date birthDate = new Date(cal.getTimeInMillis());
 			
+			Date dateCompare = new Date(System.currentTimeMillis());
+			
+			if (birthDate.compareTo(dateCompare) > 0)
+				return new Return(false, "Preencha uma data válida (menor que o dia de hoje)", null);
 			this.pet.setBirth(birthDate);
 			
 		} catch (NumberFormatException e) {

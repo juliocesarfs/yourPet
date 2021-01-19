@@ -5,24 +5,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.ControlPet;
 import model.Pet;
+import utils.Constants;
 import utils.Return;
 import view.DeletePetFrame;
 import view.controller.ScreenTransitions;
 
 public class DeletePanel extends JPanel implements ActionListener {
 	
-	public JLabel name;
-	public JLabel race;
-	public JLabel specie;
-	public JLabel age;
-	public JLabel gender;
+	public Label name;
+	public Label race;
+	public Label specie;
+	public Label age;
+	public Label gender;
 	public Button btnConfirm;
 	public Button btnBack;
 	
@@ -30,21 +30,38 @@ public class DeletePanel extends JPanel implements ActionListener {
 	public Pet pet;
 	public ScreenTransitions screenTransitions = new ScreenTransitions(null);
 	public DeletePetFrame currentFrame;
+	public Constants constant = new Constants();
 	
 	public DeletePanel(DeletePetFrame currentFrame, Pet pet) {
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(null);
+		this.setBackground(constant.COLOR_BACKGROUND);
 		
 		this.currentFrame = currentFrame;
 		this.pet = pet;
 		
-		this.name = new JLabel("Nome: "+pet.getName());
-		this.race = new JLabel("Raça: "+pet.getRace());
-		this.specie = new JLabel("Espécie: "+pet.getSpecie());
-		this.age = new JLabel("Idade: "+pet.getAge());
-		this.gender = new JLabel("Sexo: "+pet.getGender());
+		this.name = new Label("Nome: "+pet.getName());
+		this.name.setBounds(150, 40, 100, 20);
+		
+		this.race = new Label("Raça: "+pet.getRace());
+		this.race.setBounds(150, 80, 100, 20);
+		
+		this.specie = new Label("Espécie: "+pet.getSpecie());
+		this.specie.setBounds(150, 120, 100, 20);
+		
+		this.age = new Label("Idade: "+pet.getAge());
+		this.age.setBounds(150, 160, 100, 20);
+		
+		this.gender = new Label("Sexo: "+pet.getGender());
+		this.gender.setBounds(150, 200, 100, 20);
+		
 		
 		this.btnConfirm = new Button("Deletar");
+		this.btnConfirm.setBounds(230, 260, 106, 50);
+		this.btnConfirm.setBackground(constant.COLOR_RED);
+		
 		this.btnBack = new Button("Voltar");
+		this.btnBack.setBounds(120, 260, 106, 50);
+		this.btnBack.setBackground(constant.COLOR_YELLOW);
 		
 		this.btnConfirm.addActionListener(this);
 		this.btnBack.addActionListener(this);
@@ -54,9 +71,8 @@ public class DeletePanel extends JPanel implements ActionListener {
 		add(this.specie);
 		add(this.age);
 		add(this.gender);
-		add(this.btnConfirm);
 		add(this.btnBack);
-		
+		add(this.btnConfirm);
 	}
 
 
@@ -69,10 +85,7 @@ public class DeletePanel extends JPanel implements ActionListener {
 		if (btn.getText() == "Deletar") {
 			result = deleteAction();
 			
-			if (!result.isSucess())
-				JOptionPane.showMessageDialog(null, "Erro ao deletar Pet");
-			else
-				JOptionPane.showMessageDialog(null, "Pet deletado com sucesso");
+			JOptionPane.showMessageDialog(null, result.getMessage());
 		}
 		this.screenTransitions.showMainFrame();
 		this.currentFrame.dispose();

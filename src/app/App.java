@@ -1,12 +1,11 @@
-package test;
+package app;
 
-import javax.swing.JButton;
 
-import view.CreatePetFrame;
 import view.MainFrame;
 
-public class TestWindow {
+public class App {
 	public static void main(String[] args) {
 		MainFrame window = new MainFrame("yourPet");
+	
 	}
 }

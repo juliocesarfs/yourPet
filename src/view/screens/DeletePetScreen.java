@@ -3,15 +3,12 @@ package view.screens;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.ControlPet;
 import model.Pet;
 import view.DeletePetFrame;
-import view.MainFrame;
 import view.components.DeletePanel;
-import view.components.FormPanel;
 import view.components.TitlePanel;
 
 public class DeletePetScreen extends JPanel {

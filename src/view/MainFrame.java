@@ -1,6 +1,7 @@
 package view;
 
-import java.awt.event.ActionListener;
+
+import java.awt.Color;
 
 import javax.swing.*;
 
@@ -16,6 +17,8 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(MainFrame.EXIT_ON_CLOSE);
         setSize(500, 600);
         setResizable(false);
+        
+        this.setLocationRelativeTo(null);
 
         getContentPane().add(new MainScreen(this));
         setVisible(true);

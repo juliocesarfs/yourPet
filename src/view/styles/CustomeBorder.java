@@ -13,7 +13,7 @@ public class CustomeBorder extends AbstractBorder {
         super.paintBorder(c, g, x, y, width, height);
         Graphics2D g2d = (Graphics2D)g;
         g2d.setStroke(new BasicStroke(12));
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(new Color(18, 18, 20));
         g2d.drawRoundRect(x, y, width - 1, height - 1, 25, 25);
     }
 

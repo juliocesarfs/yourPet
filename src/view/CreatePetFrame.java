@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 import view.screens.CreatePetScreen;
 
@@ -14,6 +13,7 @@ public class CreatePetFrame extends JFrame {
         setResizable(false);
         
         setVisible(true);
+        this.setLocationRelativeTo(null);
         
         getContentPane().add(new CreatePetScreen(this));
     }

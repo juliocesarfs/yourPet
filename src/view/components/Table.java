@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ControlPet;
+import exception.PersistenceException;
 import model.Pet;
 
 public class Table extends JTable {
@@ -33,11 +34,15 @@ public class Table extends JTable {
 	
 	public Pet getSelectedPet() {
 		Pet pet;
-		int row = this.getSelectedRow();
-		int petID = (Integer) this.getValueAt(row, 0);
-		
-		pet = (Pet) this.controlPet.getPetById(petID).getValue();
-		return pet;
+		try {
+			int row = this.getSelectedRow();
+			int petID = (Integer) this.getValueAt(row, 0);
+			
+			pet = (Pet) this.controlPet.getPetById(petID).getValue();
+			return pet;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new PersistenceException("Selecione uma linha da tabela", e);
+		}
 	}
 
 }

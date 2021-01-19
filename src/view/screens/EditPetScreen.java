@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import controller.ControlPet;
 import model.Pet;
 import view.EditPetFrame;
-import view.MainFrame;
 import view.components.FormPanel;
 import view.components.TitlePanel;
 
