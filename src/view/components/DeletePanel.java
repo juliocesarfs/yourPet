@@ -40,19 +40,19 @@ public class DeletePanel extends JPanel implements ActionListener {
 		this.pet = pet;
 		
 		this.name = new Label("Nome: "+pet.getName());
-		this.name.setBounds(150, 40, 100, 20);
+		this.name.setBounds(150, 40, 110, 20);
 		
 		this.race = new Label("Raça: "+pet.getRace());
-		this.race.setBounds(150, 80, 100, 20);
+		this.race.setBounds(150, 80, 110, 20);
 		
 		this.specie = new Label("Espécie: "+pet.getSpecie());
-		this.specie.setBounds(150, 120, 100, 20);
+		this.specie.setBounds(150, 120, 110, 20);
 		
 		this.age = new Label("Idade: "+pet.getAge());
-		this.age.setBounds(150, 160, 100, 20);
+		this.age.setBounds(150, 160, 110, 20);
 		
 		this.gender = new Label("Sexo: "+pet.getGender());
-		this.gender.setBounds(150, 200, 100, 20);
+		this.gender.setBounds(150, 200, 110, 20);
 		
 		
 		this.btnConfirm = new Button("Deletar");
