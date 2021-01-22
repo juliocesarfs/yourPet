@@ -3,7 +3,7 @@ CREATE TABLE public.pet
 (
 	id serial NOT NULL,
 	name character varying(40) NOT NULL,
-	race character varying(40),
+	race character varying(40) NOT NULL,
 	specie character varying(40) NOT NULL,
 	birth date NOT NULL,
 	gender character varying(1) NOT NULL
