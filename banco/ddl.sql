@@ -1,5 +1,5 @@
 -- DDL -- Data Definition Language
-CREATE TABLE public.amigo
+CREATE TABLE public.pet
 (
 	id serial NOT NULL,
 	name character varying(40) NOT NULL,
