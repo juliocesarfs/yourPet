@@ -9,7 +9,7 @@
 ---
 
 This project was developed for the **Programming 2 class**, in the **Computer Information Systems** course 
-at **Goiás State University**
+at **Universidade Estadual de Goiás**
 
 ### 💬 Purpose
 The objective of this project was to know the main functions of Java Swing and use a database...
